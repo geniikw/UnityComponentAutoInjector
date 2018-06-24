@@ -31,6 +31,8 @@
 	[FindObjectOfType] public ClassExample[] _classes3;     // 현재 씬에 존재하는 타입들을 찾아서 모두 주입시킵니다.
 	[FindObjectOfType] public List<ClassExample> _classList3;
   
+  
+  
 주의 사항 :
   1. private 변수는 [SerializeField] 직렬화 속성을 무조건 포함해야 합니다.
   2. 자동으로 주입시킬 스크립트를 인스펙터창 화면으로 반드시 확인해야 합니다.
