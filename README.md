@@ -19,12 +19,13 @@
 	[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
 
 	[GetComponentInChildrenName("ObjectExample")] public ClassExample _variableName; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
-	[GetComponentInChildrenName] public ClassExample _objectExample;                 // ObjectExample 오브젝트가 주입됩니다.
-																					 // 이름이 없으면 변수이름으로 찾습니다.
-																					 // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
+	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
+									  // 이름이 없으면 변수이름으로 찾습니다.
+									  // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
 
-	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;      // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObject1;    // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니다.      [FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjects; // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
+	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;         // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
+	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObject1;     // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
+	[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjects;   // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
 	[FindGameObjectWithTag("태그 이름")] public List<ClassExample> _gameObjectList;
 
 	[FindObjectOfType] public ClassExample _class3;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
@@ -42,3 +43,25 @@
   6. 에디터 상에서만 동작되며 빌드시에는 아무런 문제가 없습니다. 안심하셔도 됩니다.
   
 기타 피드백은 및 개선사항은 Issues 에 작성해주세요.
+
+MIT License
+
+Copyright (c) 2018 LOL
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
