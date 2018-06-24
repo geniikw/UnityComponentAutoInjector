@@ -100,7 +100,10 @@ public static class CAutoInjector
 					if (isForceInject == false && property.objectReferenceValue != null) continue;
 
 					if (IsGetComponentAttribute(obj, currentAttribute, fieldInfo, fieldType, out componentOut))
+					{
 						property.objectReferenceValue = (componentOut as UnityEngine.Object);
+					}
+
 				}
 
 				if (isInjected == false && componentOut != null)

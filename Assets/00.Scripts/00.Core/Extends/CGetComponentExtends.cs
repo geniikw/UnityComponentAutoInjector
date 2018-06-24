@@ -35,7 +35,7 @@ public static class CGetComponentExtends
 			return compo;
 		}
 
-		Debug.LogError(type.Name + " 컴퍼넌트를 찾을 수 없습니다.", component);
+		Debug.LogWarning("<b>" + type.Name + "</b> 자식 컴퍼넌트를 찾을 수 없습니다.", component);
 
 		return null;
 	}
@@ -61,7 +61,7 @@ public static class CGetComponentExtends
 				return compo;
 		}
 
-		Debug.LogError(objectName + " 컴퍼넌트를 찾을 수 없습니다.", component);
+		Debug.LogWarning("<b>" + objectName + "</b> 자식 컴퍼넌트를 찾을 수 없습니다.", component);
 
 		return null;
 	}
@@ -92,7 +92,7 @@ public static class CGetComponentExtends
 				return gameObject;
 		}
 
-		Debug.LogError(objectName + " 게임 오브젝트를 찾을 수 없습니다.", component);
+		Debug.LogWarning("<b>" + objectName + "</b> 자식 게임 오브젝트를 찾을 수 없습니다.", component);
 
 		return null;
 	}
@@ -119,7 +119,7 @@ public static class CGetComponentExtends
 
 		if (newComponentList == null)
 		{
-			Debug.LogError(typeof(T).Name + " 컴퍼넌트 배열을 찾을 수 없습니다.", component);
+			Debug.LogWarning("<b>" + typeof(T).Name + "</b> 자식 컴퍼넌트 배열을 찾을 수 없습니다.", component);
 			return null;
 		}
 
