@@ -23,8 +23,9 @@
 																					 // 이름이 없으면 변수이름으로 찾습니다.
 																					 // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
 
-	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;      // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObject1;    // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니다.      [FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjects; // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
+	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;        // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
+	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObject1;    // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
+	[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjects;  // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
 	[FindGameObjectWithTag("태그 이름")] public List<ClassExample> _gameObjectList;
 
 	[FindObjectOfType] public ClassExample _class3;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
