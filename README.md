@@ -13,6 +13,10 @@
 	[GetComponentInChildren] public ClassExample _class1;
 	[GetComponentInChildren] public ClassExample[] _classes1;
 	[GetComponentInChildren(true)] public List<ClassExample> _classList1; // 꺼져있는 오브젝트도 주입됩니다.
+	
+	[GetComponentInParent] public ClassExample _class4;
+	[GetComponentInParent] public ClassExample[] _classes4;
+	[GetComponentInParent(true)] public List<ClassExample> _classList4; // 꺼져있는 오브젝트도 주입됩니다.
 
 	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식에서만 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
 	[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
