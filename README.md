@@ -4,7 +4,8 @@
   변수, 배열, 리스트의 타입에 맞춰서 자동으로 주입됩니다.
   만약 상속 되어있는 클래스도 이 속성이 존재하면 모두 주입됩니다.
   
-[SerializeField, HideInInspector(변수를 가리고 싶은 경우), GetComponent] private ClassExample _classExample // 만약 변수가 private 일때
+[SerializeField, HideInInspector(변수를 가리고 싶은 경우), GetComponent]
+private ClassExample _classExample // 만약 변수가 private 일때
 
 [GetComponent] public ClassExample _class; // GameObject 지원
 [GetComponent] public ClassExample[] _classes;
