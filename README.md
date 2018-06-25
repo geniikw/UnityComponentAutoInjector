@@ -18,9 +18,10 @@
 	[GetComponentInParent] public ClassExample[] _classes4;
 	[GetComponentInParent(true)] public List<ClassExample> _classList4; // 꺼져있는 오브젝트도 주입됩니다.
 
-	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식에서만 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
+	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식과 자식 계층구조 모두 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
 	[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
 	[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
+	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; // false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
 
 	[GetComponentInChildrenName("ObjectExample")] public ClassExample _variableName; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
 	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
@@ -47,6 +48,17 @@
   6. 에디터 상에서만 동작되며 빌드시에는 아무런 문제가 없습니다. 안심하셔도 됩니다.
   
 기타 피드백은 및 개선사항은 Issues 에 작성해주세요.
+
+
+6.25 오후 12시 이전에 기능 업데이트 예정입니다.
+
+1. 인스펙터 창에서 컴포넌트 톱니바퀴를 누르면 하단에 Force Auto Injection 메뉴가 생깁니다.
+   이걸 누를 시 해당 컴포넌트 변수들은 모두 재 주입이 됩니다.
+   
+2. GetComponentInChildrenOnly 속성에 bool includeInDepth = true 파라미터가 생깁니다. 
+   기본값은 (true) 이며 자식과 자식의 계층구조를 모두 찾고 (false) 로 설정하면 자식만 찾습니다.
+   
+3. 기타 버그 수정.
 
 MIT License
 
