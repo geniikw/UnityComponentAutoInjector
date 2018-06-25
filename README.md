@@ -49,7 +49,7 @@
   3. (업데이트 예정) 해당 컴퍼넌트의 변수들을 재 주입 시키려면 톱니바퀴를 누른 후 [Force Auto Injection] 을 누릅니다.
   4. 에디터 상에서만 동작되며 빌드시에는 아무런 문제가 없습니다. 안심하셔도 됩니다.
   5. 이 에셋을 사용전에 이미 Prefab 이 되어있다면 다시 에디터로 옮겨서 재 주입을 시켜야 됩니다.
-  6. 동적 오브젝트 생성은 미지원입니다. 유니티 기본내장이 되어있는 GetComponent 를 사용하세요.
+  6. 동적 오브젝트 생성(new GameObject(name)) 에서의 자동주입은 당연히 미지원 입니다. 대신 유니티 기본 내장 되어있는 GetComponent 를 사용하세요.
   7. (업데이트 예정) 다른 커스텀 에디터를 사용하는 경우에는 해당 에디터 코드의
   OnEnable() 에는 CAutoInjectionEditor.AutoInjectionWithForceList(serializedObject); OnDisable() 에는 CAutoInjectionEditor.Clear();
   를 호출하면 됩니다. 만약 에디터 코드를 상속받게 될 경우에도 동일하게 적용시켜주면 됩니다.
