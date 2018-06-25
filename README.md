@@ -50,22 +50,27 @@
   4. 에디터 상에서만 동작되며 빌드시에는 아무런 문제가 없습니다. 안심하셔도 됩니다.
   5. 이 에셋을 사용전에 이미 Prefab 이 되어있다면 다시 에디터로 옮겨서 재 주입을 시켜야 됩니다.
   6. 동적 오브젝트 생성은 미지원입니다. 유니티 기본내장이 되어있는 GetComponent 를 사용하세요.
+  7. (업데이트 예정) 다른 커스텀 에디터를 사용하는 경우에는 해당 에디터 코드의
+  OnEnable() 에는 CAutoInjectionEditor.AutoInjectionWithForceList(serializedObject); OnDisable() 에는 CAutoInjectionEditor.Clear();
+  를 호출하면 됩니다. 만약 에디터 코드를 상속받게 될 경우에도 동일하게 적용시켜주면 됩니다.
   
-  7. 다른 커스텀 에디터를 사용하는 경우에는 에디터 코드 OnEnable에 CAutoInjectionEditor.AutoInjectionWithForceList(serializedObject);
-     OnDisable 에는 CAutoInjectionEditor.Clear(); 를 호출하면 됩니다.
+  
   
 기타 피드백은 및 개선사항은 Issues 에 작성해주세요.
+
+
 
 
 6.25 오후 12시 이전에 기능 업데이트 예정입니다.
 
 1. 인스펙터 창에서 컴포넌트 톱니바퀴를 누르면 하단에 Force Auto Injection 메뉴가 생깁니다.
    이걸 누를 시 해당 컴포넌트 변수들은 모두 재 주입이 됩니다.
-   
 2. GetComponentInChildrenOnly 속성에 bool includeInDepth = true 파라미터가 생깁니다. 
    기본값은 (true) 이며 자식과 자식의 계층구조를 모두 찾고 (false) 로 설정하면 자식만 찾습니다.
-   
 3. 기타 버그 수정.
+
+
+
 
 MIT License
 
