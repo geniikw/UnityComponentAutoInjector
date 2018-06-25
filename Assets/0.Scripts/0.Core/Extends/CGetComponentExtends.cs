@@ -21,7 +21,6 @@ public static class CGetComponentExtends
 
 	public static UnityEngine.Object GetComponent(this Component component, Type type)
 	{
-		Debug.Log(type);
 		if (IsGameObjectType(type))
 			return component.GetGameObject();
 
