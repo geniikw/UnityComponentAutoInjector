@@ -10,13 +10,13 @@ public interface IAutoInjectable { }
 
 namespace AutoInjector
 {
-	public class InActiveBase : Attribute, IAutoInjectable
+	public class BoolBase : Attribute, IAutoInjectable
 	{
-		public readonly bool includeInActive;
+		public readonly bool @bool;
 
-		public InActiveBase(bool includeInActive)
+		public BoolBase(bool @bool)
 		{
-			this.includeInActive = includeInActive;
+			this.@bool = @bool;
 		}
 	}
 
@@ -43,10 +43,10 @@ namespace AutoInjector
 
 [AttributeUsage(AttributeTargets.Field)] public class GetComponentAttribute : Attribute, IAutoInjectable { }
 
-[AttributeUsage(AttributeTargets.Field)] public class GetComponentInParentAttribute : AutoInjector.InActiveBase {
+[AttributeUsage(AttributeTargets.Field)] public class GetComponentInParentAttribute : AutoInjector.BoolBase {
 	public GetComponentInParentAttribute(bool includeInActive = false) : base(includeInActive) { }
 }
-[AttributeUsage(AttributeTargets.Field)] public class GetComponentInChildrenAttribute : AutoInjector.InActiveBase {
+[AttributeUsage(AttributeTargets.Field)] public class GetComponentInChildrenAttribute : AutoInjector.BoolBase {
 	public GetComponentInChildrenAttribute(bool includeInActive = false) : base(includeInActive) { }
 }
 
@@ -54,7 +54,9 @@ namespace AutoInjector
 	public GetComponentInChildrenNameAttribute(string componentName = null) : base(componentName) { }
 }
 
-[AttributeUsage(AttributeTargets.Field)] public class GetComponentInChildrenOnlyAttribute : Attribute, IAutoInjectable { }
+[AttributeUsage(AttributeTargets.Field)] public class GetComponentInChildrenOnlyAttribute : AutoInjector.BoolBase {
+	public GetComponentInChildrenOnlyAttribute(bool includeInDepth = true) : base(includeInDepth) { }
+}
 
 
 [AttributeUsage(AttributeTargets.Field)] public class FindGameObjectAttribute : AutoInjector.NameBase {

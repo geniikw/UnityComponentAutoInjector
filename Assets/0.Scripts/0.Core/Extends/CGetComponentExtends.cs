@@ -11,20 +11,47 @@ using System.Collections.Generic;
 
 public static class CGetComponentExtends
 {
+	public static bool GetComponent<T>(this Component component, out T componentOut)
+		where T : Component
+	{
+		componentOut = component.GetComponent<T>();
+
+		return (componentOut != null);
+	}
+
 	public static UnityEngine.Object GetComponent(this Component component, Type type)
 	{
+		Debug.Log(type);
 		if (IsGameObjectType(type))
 			return component.GetGameObject();
 
 		return component.GetComponent(type);
 	}
 
-	public static UnityEngine.Object GetComponentInChildrenOnly(this Component component, Type type)
+	public static UnityEngine.Object GetComponentInChildrenOnly(this Component component, Type type, bool includeInDepth = true)
 	{
 		if (IsGameObjectType(type))
 			return component.GetGameObjectInChildrenName(null);
 
-		Component[] components = component.GetComponentsInChildren(type, true);
+		Component[] components = null;
+
+		if (includeInDepth)
+			components = component.GetComponentsInChildren(type, true);
+		else
+		{
+			Transform transform = component.transform;
+			int childCount = transform.childCount;
+			components = new Component[childCount];
+
+			for (int i = 0; i < childCount; i++)
+			{
+				Component componentChild = transform.GetChild(i).GetComponent(type);
+				if (componentChild != null)
+					components[i] = componentChild;
+				else
+					return null;
+			}
+		}
 
 		int len = components.Length;
 		for (int i = 0; i < len; i++)
@@ -97,7 +124,7 @@ public static class CGetComponentExtends
 		return null;
 	}
 
-	public static T[] GetComponentsInChildrenOnly<T>(this Component component)
+	public static T[] GetComponentsInChildrenOnly<T>(this Component component, bool includeInDepth = true)
 		where T : Component
 	{
 		T[] components = component.GetComponentsInChildren<T>(true);
@@ -106,10 +133,16 @@ public static class CGetComponentExtends
 
 		List<T> newComponentList = null;
 
+		Transform componentTrans = component.transform;
+
 		for (int i = 0; i < len; i++)
 		{
 			T currentComponent = components[i];
-			if (currentComponent.transform == component.transform) continue;
+			Transform currentTrans = currentComponent.transform;
+
+			if (currentTrans == componentTrans) continue;
+
+			if (includeInDepth == false && currentTrans.parent != componentTrans) continue;
 
 			if (newComponentList == null)
 				newComponentList = new List<T>();
