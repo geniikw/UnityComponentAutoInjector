@@ -24,8 +24,7 @@
 	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식과 자식 계층구조 모두 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
 	[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
 	[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
-	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; // (업데이트 예정)
-										   //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
+	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
 
 	[GetComponentInChildrenName("ObjectExample")] public ClassExample _objectExample; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
 	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
@@ -46,11 +45,11 @@
 주의 사항 :
   1. private 변수는 [SerializeField] 직렬화 속성을 무조건 포함해야 합니다.
   2. 자동으로 주입시킬 스크립트를 인스펙터창 화면으로 반드시 확인해야 합니다.
-  3. (업데이트 예정) 해당 컴퍼넌트의 변수들을 재 주입 시키려면 톱니바퀴를 누른 후 [Force Auto Injection] 을 누릅니다.
+  3. 해당 컴퍼넌트의 변수들을 재 주입 시키려면 톱니바퀴를 누른 후 [Force Auto Injection] 을 누릅니다.
   4. 에디터 상에서만 동작되며 빌드시에는 아무런 문제가 없습니다. 안심하셔도 됩니다.
   5. 이 에셋을 사용전에 이미 Prefab 이 되어있다면 다시 에디터로 옮겨서 재 주입을 시켜야 됩니다.
   6. 동적 오브젝트 생성(new GameObject(name)) 에서의 자동주입은 당연히 미지원 입니다. 대신 유니티 기본 내장 되어있는 GetComponent 를 사용하세요.
-  7. (업데이트 예정) 다른 커스텀 에디터를 사용하는 경우에는 해당 에디터 코드의
+  7. 다른 커스텀 에디터를 사용하는 경우에는 해당 에디터 코드의
   OnEnable() 에는 CAutoInjectionEditor.AutoInjectionWithForceList(serializedObject); OnDisable() 에는 CAutoInjectionEditor.Clear();
   를 호출하면 됩니다. 만약 에디터 코드를 상속받게 될 경우에도 동일하게 적용시켜주면 됩니다.
   
@@ -61,8 +60,7 @@
 
 
 
-6.25 오후 12시 이전에 기능 업데이트 예정입니다.
-
+6.25 오후 2시 20분 기능 업데이트 되었습니다.
 1. 인스펙터 창에서 컴포넌트 톱니바퀴를 누르면 하단에 Force Auto Injection 메뉴가 생깁니다.
    이걸 누를 시 해당 컴포넌트 변수들은 모두 재 주입이 됩니다.
 2. GetComponentInChildrenOnly 속성에 bool includeInDepth = true 파라미터가 생깁니다. 
