@@ -24,7 +24,8 @@
 	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식과 자식 계층구조 모두 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
 	[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
 	[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
-	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; // false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
+	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; // (업데이트 예정)
+										   //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
 
 	[GetComponentInChildrenName("ObjectExample")] public ClassExample _variableName; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
 	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
