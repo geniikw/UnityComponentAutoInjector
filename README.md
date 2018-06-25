@@ -27,19 +27,19 @@
 	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; // (업데이트 예정)
 										   //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
 
-	[GetComponentInChildrenName("ObjectExample")] public ClassExample _variableName; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
+	[GetComponentInChildrenName("ObjectExample")] public ClassExample _objectExample; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
 	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
 									  // 이름이 없으면 변수이름으로 찾습니다.
 									  // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
 
 	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;         // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObject1;     // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
-	[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjects;   // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public List<ClassExample> _gameObjectList;
+	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObjectTag;     // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
+	[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjectsTag;   // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
+	[FindGameObjectWithTag("태그 이름")] public List<GameObject> _gameObjectListTag;
 
-	[FindObjectOfType] public ClassExample _class3;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
-	[FindObjectOfType] public ClassExample[] _classes3;     // 현재 씬에 존재하는 타입들을 찾아서 모두 주입시킵니다.
-	[FindObjectOfType] public List<ClassExample> _classList3;
+	[FindObjectOfType] public ClassExample _classType;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
+	[FindObjectOfType] public ClassExample[] _classesType;     // 현재 씬에 존재하는 타입들을 찾아서 모두 주입시킵니다.
+	[FindObjectOfType] public List<ClassExample> _classListType;
   
   
   
