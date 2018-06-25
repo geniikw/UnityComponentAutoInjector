@@ -51,6 +51,9 @@
   5. 이 에셋을 사용전에 이미 Prefab 이 되어있다면 다시 에디터로 옮겨서 재 주입을 시켜야 됩니다.
   6. 동적 오브젝트 생성은 미지원입니다. 유니티 기본내장이 되어있는 GetComponent 를 사용하세요.
   
+  7. 다른 커스텀 에디터를 사용하는 경우에는 에디터 코드 OnEnable에 CAutoInjectionEditor.AutoInjectionWithForceList(serializedObject);
+     OnDisable 에는 CAutoInjectionEditor.Clear(); 를 호출하면 됩니다.
+  
 기타 피드백은 및 개선사항은 Issues 에 작성해주세요.
 
 
