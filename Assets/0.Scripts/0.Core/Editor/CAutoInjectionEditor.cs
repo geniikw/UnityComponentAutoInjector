@@ -21,7 +21,7 @@ namespace UnityEditor
 		{
 			int count = _serializedObjectList.Count;
 			if (count == 0)
-				Debug.LogWarning("직렬화된 오브젝트가 없습니다.");
+				CDebug.LogWarning("직렬화된 오브젝트가 없습니다. 인스펙터 창을 갱신해주세요.");
 
 			for (int i = 0; i < count; i++)
 				AutoInjection(_serializedObjectList[i], true);

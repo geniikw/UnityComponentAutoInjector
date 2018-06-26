@@ -29,13 +29,13 @@ namespace AutoInjector
 			this.name = componentName;
 		}
 
-		public string NameOfTrimUnderscore(string variableName)
+		public string Trim(string varName)
 		{
-			string nameOf = name;
-			if (string.IsNullOrEmpty(nameOf))
-				nameOf = variableName.TrimUnderscore();
+			string trim = name;
+			if (string.IsNullOrEmpty(trim))
+				trim = varName.TrimMemberVarName();
 
-			return nameOf;
+			return trim;
 		} 
 	}
 }

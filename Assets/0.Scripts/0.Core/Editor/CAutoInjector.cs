@@ -20,9 +20,9 @@ namespace UnityEditor
 
 		public static void Inject(SerializedObject serializedObject, bool isForceInject = false)
 		{
-			if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+			if (EditorApplication.isPlaying) return;
 
-			object obj = serializedObject.targetObject;
+			UnityEngine.Object obj = serializedObject.targetObject;
 			if (obj == null) return;
 
 			FieldInfo[] fields = obj.GetType().GetFieldInfoWithBaseClass(_bindingFlags);
@@ -42,8 +42,8 @@ namespace UnityEditor
 				int lenAttributes = attributes.Length;
 				for (int j = 0; j < lenAttributes; j++)
 				{
-					object currentAttribute = attributes[j];
-					if ((currentAttribute is IAutoInjectable) == false) continue;
+					object attribute = attributes[j];
+					if ((attribute is IAutoInjectable) == false) continue;
 
 					string variableName = fieldInfo.Name;
 					SerializedProperty property = serializedObject.FindProperty(variableName);
@@ -56,7 +56,7 @@ namespace UnityEditor
 
 						property.arraySize = 0;
 
-						if (IsGetComponentsAttribute(obj, currentAttribute, fieldInfo, elementType, out componentOut))
+						if (IsGetComponentsAttribute(obj, attribute, fieldInfo, elementType, out componentOut))
 						{
 							Array array = (componentOut as Array);
 
@@ -72,6 +72,8 @@ namespace UnityEditor
 							if (length <= 0)
 								componentOut = null;
 						}
+						else
+							LogToInjectionFailed(obj, attribute, fieldInfo);
 					}
 					else if (fieldType.IsGenericType)
 					{
@@ -81,7 +83,7 @@ namespace UnityEditor
 
 							property.arraySize = 0;
 
-							if (IsGetComponentsAttribute(obj, currentAttribute, fieldInfo, fieldType.GetGenericArguments()[0], out componentOut))
+							if (IsGetComponentsAttribute(obj, attribute, fieldInfo, fieldType.GetGenericArguments()[0], out componentOut))
 							{
 								ICollection collection = (componentOut as ICollection);
 
@@ -102,6 +104,8 @@ namespace UnityEditor
 								if (length <= 0)
 									componentOut = null;
 							}
+							else
+								LogToInjectionFailed(obj, attribute, fieldInfo);
 						}
 					}
 					else
@@ -110,8 +114,10 @@ namespace UnityEditor
 
 						property.objectReferenceValue = null;
 
-						if (IsGetComponentAttribute(obj, currentAttribute, fieldInfo, fieldType, out componentOut))
+						if (IsGetComponentAttribute(obj, attribute, fieldInfo, fieldType, out componentOut))
 							property.objectReferenceValue = (componentOut as UnityEngine.Object);
+						else
+							LogToInjectionFailed(obj, attribute, fieldInfo);
 					}
 
 					if (isInjected == false && componentOut != null)
@@ -119,14 +125,10 @@ namespace UnityEditor
 				}
 			}
 
-			if (isInjected)
-			{
-				UnityEngine.Object unityObject = (obj as UnityEngine.Object);
-				Debug.Log("<b><i><color=black>" + (obj as UnityEngine.Object).name + "</color><color=green> Auto injection complete.</color></i></b>", unityObject);
-			}
+			if (isInjected) LogToInjectionComplete(obj);
 		}
 
-		private static bool IsGetComponentsAttribute(object obj, object attribute, FieldInfo fieldInfo, Type elementType, out object componentsOut)
+		private static bool IsGetComponentsAttribute(UnityEngine.Object obj, object attribute, FieldInfo fieldInfo, Type elementType, out object componentsOut)
 		{
 			componentsOut = null;
 
@@ -147,7 +149,7 @@ namespace UnityEditor
 
 			else if (attribute is FindGameObjectWithTagAttribute)
 				componentsOut = typeof(GameObject).Invoke(obj, "FindGameObjectsWithTag", new[] { typeof(string) },
-					(attribute as FindGameObjectWithTagAttribute).NameOfTrimUnderscore(fieldInfo.Name));
+					(attribute as FindGameObjectWithTagAttribute).Trim(fieldInfo.Name));
 
 			else if (attribute is FindObjectOfTypeAttribute)
 				componentsOut = typeof(UnityEngine.Object).Invoke(obj, "FindObjectsOfType", new[] { typeof(Type) }, elementType);
@@ -155,7 +157,7 @@ namespace UnityEditor
 			return (componentsOut != null);
 		}
 
-		private static bool IsGetComponentAttribute(object obj, object attribute, FieldInfo fieldInfo, Type fieldType, out object componentOut)
+		private static bool IsGetComponentAttribute(UnityEngine.Object obj, object attribute, FieldInfo fieldInfo, Type fieldType, out object componentOut)
 		{
 			componentOut = null;
 
@@ -174,21 +176,37 @@ namespace UnityEditor
 
 			else if (attribute is GetComponentInChildrenNameAttribute)
 				componentOut = typeof(CGetComponentExtends).Invoke(obj, "GetComponentInChildrenName", new[] { typeof(Component), typeof(Type), typeof(string) }, obj, fieldType,
-					(attribute as GetComponentInChildrenNameAttribute).NameOfTrimUnderscore(fieldInfo.Name));
+					(attribute as GetComponentInChildrenNameAttribute).Trim(fieldInfo.Name));
 
 
 			else if (attribute is FindGameObjectAttribute)
 				componentOut = typeof(GameObject).Invoke(obj, "Find", new[] { typeof(string) },
-					(attribute as FindGameObjectAttribute).NameOfTrimUnderscore(fieldInfo.Name));
+					(attribute as FindGameObjectAttribute).Trim(fieldInfo.Name));
 
 			else if (attribute is FindGameObjectWithTagAttribute)
 				componentOut = typeof(GameObject).Invoke(obj, "FindGameObjectWithTag", new[] { typeof(string) },
-					(attribute as FindGameObjectWithTagAttribute).NameOfTrimUnderscore(fieldInfo.Name));
+					(attribute as FindGameObjectWithTagAttribute).Trim(fieldInfo.Name));
 
 			else if (attribute is FindObjectOfTypeAttribute)
 				componentOut = typeof(UnityEngine.Object).Invoke(obj, "FindObjectOfType", new[] { typeof(Type) }, fieldType);
 
 			return (componentOut != null);
+		}
+
+		private static void LogToInjectionFailed(UnityEngine.Object obj, object attribute, FieldInfo fieldInfo)
+		{
+			CDebug.Log(obj, "<b><i>", obj, " <color=red>Auto Injection Failed!</color></i></b>\n",
+					  "Click here for more details.\n\n",
+					  "<color=#569cd6>class</color> <b><color=#40a591>", obj.GetType(), "</color></b> or base class\n",
+					  "{\n",
+					  "      <b><color=#40a591>[", attribute.ToString().Replace("Attribute", ""), "]</color></b>\n",
+					  "      <b><color=#40a591>", fieldInfo.FieldType.Name, "</color></b> ", fieldInfo.Name, ";   <b><color=red>Failed!</color></b>\n",
+					  "}\n");
+		}
+
+		private static void LogToInjectionComplete(UnityEngine.Object obj)
+		{
+			CDebug.Log(obj, "<b><i>", obj, " <color=green>Auto injection complete.</color></i></b>");
 		}
 	}
 }

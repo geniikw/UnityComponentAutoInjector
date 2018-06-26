@@ -27,6 +27,20 @@ public static class CGetComponentExtends
 		return component.GetComponent(type);
 	}
 
+	public static bool GetComponentInChildrenOnly<T>(this Component component, out T objOut, bool includeInDepth = true)
+		where T : UnityEngine.Object
+	{
+		objOut = component.GetComponentInChildrenOnly<T>();
+
+		return (objOut != null);
+	}
+
+	public static T GetComponentInChildrenOnly<T>(this Component component, bool includeInDepth = true)
+		where T : UnityEngine.Object
+	{
+		return (component.GetComponentInChildrenOnly(typeof(T), includeInDepth) as T);
+	}
+
 	public static UnityEngine.Object GetComponentInChildrenOnly(this Component component, Type type, bool includeInDepth = true)
 	{
 		if (IsGameObjectType(type))
@@ -61,8 +75,6 @@ public static class CGetComponentExtends
 			return compo;
 		}
 
-		Debug.LogWarning("<b>" + type.Name + "</b> 자식 컴퍼넌트를 찾을 수 없습니다.", component);
-
 		return null;
 	}
 
@@ -86,8 +98,6 @@ public static class CGetComponentExtends
 			else if (currentName.EqualsLower(objectName))
 				return compo;
 		}
-
-		Debug.LogWarning("<b>" + objectName + "</b> 자식 컴퍼넌트를 찾을 수 없습니다.", component);
 
 		return null;
 	}
@@ -118,8 +128,6 @@ public static class CGetComponentExtends
 				return gameObject;
 		}
 
-		Debug.LogWarning("<b>" + objectName + "</b> 자식 게임 오브젝트를 찾을 수 없습니다.", component);
-
 		return null;
 	}
 
@@ -149,12 +157,7 @@ public static class CGetComponentExtends
 			newComponentList.Add(currentComponent);
 		}
 
-		if (newComponentList == null)
-		{
-			Debug.LogWarning("<b>" + typeof(T).Name + "</b> 자식 컴퍼넌트 배열을 찾을 수 없습니다.", component);
-			return null;
-		}
-
+		if (newComponentList == null) return null;
 
 		return newComponentList.ToArray();
 	}
