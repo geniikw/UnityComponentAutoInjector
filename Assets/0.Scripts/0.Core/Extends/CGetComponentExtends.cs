@@ -84,6 +84,7 @@ public static class CGetComponentExtends
 			return component.GetGameObjectInChildrenName(objectName);
 
 		Component[] components = component.GetComponentsInChildren(type, true);
+		if (components == null) return null;
 
 		int len = components.Length;
 		for (int i = 0; i < len; i++)
@@ -112,6 +113,7 @@ public static class CGetComponentExtends
 	public static GameObject GetGameObjectInChildrenName(this Component component, string objectName = null)
 	{
 		Transform[] transforms = component.GetComponentsInChildrenOnly<Transform>();
+		if (transforms == null) return null;
 
 		int len = transforms.Length;
 		for (int i = 0; i < len; i++)
@@ -135,6 +137,7 @@ public static class CGetComponentExtends
 		where T : Component
 	{
 		T[] components = component.GetComponentsInChildren<T>(true);
+		if (components == null) return null;
 
 		int len = components.Length;
 
