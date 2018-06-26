@@ -58,18 +58,6 @@
 기타 피드백은 및 개선사항은 Issues 에 작성해주세요.
 
 
-
-
-6.25 오후 2시 20분 기능 업데이트 되었습니다.
-1. 인스펙터 창에서 컴포넌트 톱니바퀴를 누르면 하단에 Force Auto Injection 메뉴가 생깁니다.
-   이걸 누를 시 해당 컴포넌트 변수들은 모두 재 주입이 됩니다.
-2. GetComponentInChildrenOnly 속성에 bool includeInDepth = true 파라미터가 생깁니다. 
-   기본값은 (true) 이며 자식과 자식의 계층구조를 모두 찾고 (false) 로 설정하면 자식만 찾습니다.
-3. 기타 버그 수정.
-
-
-
-
 MIT License
 
 Copyright (c) 2018 KJH
