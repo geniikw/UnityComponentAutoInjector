@@ -22,9 +22,17 @@ namespace UnityEditor
 		{
 			if (EditorApplication.isPlaying) return;
 
-			UnityEngine.Object obj = serializedObject.targetObject;
-			if (obj == null) return;
+			if (serializedObject.targetObject == null) return;
 
+			UnityEngine.Object[] targetObjects = serializedObject.targetObjects;
+
+			int len = targetObjects.Length;
+			for (int i = 0; i < len; i++)
+				Inject(serializedObject, targetObjects[i], isForceInject);
+		}
+
+		private static void Inject(SerializedObject serializedObject, UnityEngine.Object obj, bool isForceInject = false)
+		{
 			FieldInfo[] fields = obj.GetType().GetFieldInfoWithBaseClass(_bindingFlags);
 
 			bool isInjected = false;

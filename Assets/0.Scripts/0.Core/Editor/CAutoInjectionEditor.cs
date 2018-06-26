@@ -11,7 +11,7 @@ namespace UnityEditor
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	[CustomEditor(typeof(MonoBehaviour), true), CanEditMultipleObjects]
+	[CustomEditor(typeof(MonoBehaviour), true)/*, CanEditMultipleObjects*/]
 	public class CAutoInjectionEditor : Editor
 	{
 		public static List<SerializedObject> _serializedObjectList = new List<SerializedObject>();
@@ -21,7 +21,7 @@ namespace UnityEditor
 		{
 			int count = _serializedObjectList.Count;
 			if (count == 0)
-				CDebug.LogWarning("직렬화된 오브젝트가 없습니다. 인스펙터 창을 갱신해주세요.");
+				CDebug.LogWarning("Multi-object force auto injecting not supported.");
 
 			for (int i = 0; i < count; i++)
 				AutoInjection(_serializedObjectList[i], true);
