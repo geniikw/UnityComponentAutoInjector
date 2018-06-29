@@ -5,42 +5,43 @@
 
 주입되는 방식은 에디터상의 오브젝트를 누르면 인스펙터 창이 활성화되면서 주입됩니다.
 에디터 상에서만 적용되는거라 플레이 버튼 누를시에 아무 지장이 없습니다.
-  
-만약 변수가 private 일때 속성 :
+
+```csharp
+///만약 변수가 private 일때 속성 :
 [SerializeField, HideInInspector(변수를 가리고 싶은 경우), GetComponent]
 
-	[GetComponent] public Transform _class; // GameObject 지원
-	[GetComponent] public ClassExample[] _classes;
-	[GetComponent] public List<ClassExample> _classList;
+[GetComponent] public Transform _class; // GameObject 지원
+[GetComponent] public ClassExample[] _classes;
+[GetComponent] public List<ClassExample> _classList;
 
-	[GetComponentInChildren] public ClassExample _class1;
-	[GetComponentInChildren] public ClassExample[] _classes1;
-	[GetComponentInChildren(true)] public List<ClassExample> _classList1; // 꺼져있는 오브젝트도 주입됩니다.
-	
-	[GetComponentInParent] public ClassExample _class4;
-	[GetComponentInParent] public ClassExample[] _classes4;
-	[GetComponentInParent(true)] public List<ClassExample> _classList4; // 꺼져있는 오브젝트도 주입됩니다.
+[GetComponentInChildren] public ClassExample _class1;
+[GetComponentInChildren] public ClassExample[] _classes1;
+[GetComponentInChildren(true)] public List<ClassExample> _classList1; // 꺼져있는 오브젝트도 주입됩니다.
 
-	[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식과 자식 계층구조 모두 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
-	[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
-	[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
-	[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
+[GetComponentInParent] public ClassExample _class4;
+[GetComponentInParent] public ClassExample[] _classes4;
+[GetComponentInParent(true)] public List<ClassExample> _classList4; // 꺼져있는 오브젝트도 주입됩니다.
 
-	[GetComponentInChildrenName("ObjectExample")] public ClassExample _objectExample; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
-	[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
-									  // 이름이 없으면 변수이름으로 찾습니다.
-									  // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
+[GetComponentInChildrenOnly] public ClassExample _class2;           // 자식과 자식 계층구조 모두 찾습니다. 꺼져있는 오브젝트도 주입됩니다. GameObject 지원
+[GetComponentInChildrenOnly] public ClassExample[] _classes2;       // 이것도 마찬가지
+[GetComponentInChildrenOnly] public List<ClassExample> _classList2; // 이것도 마찬가지
+[GetComponentInChildrenOnly(false)] public List<ClassExample> _classList3; //false 로 설정하면 계층구조를 제외한 자식만 찾습니다.
 
-	[FindGameObject("오브젝트 이름")] public GameObject _gameObject;         // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public GameObject _gameObjectTag;     // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
-	[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjectsTag;   // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
-	[FindGameObjectWithTag("태그 이름")] public List<GameObject> _gameObjectListTag;
+[GetComponentInChildrenName("ObjectExample")] public ClassExample _objectExample; // ObjectExample 오브젝트가 주입됩니다. GameObject 지원
+[GetComponentInChildrenName] public ClassExample _objectExample;  // ObjectExample 오브젝트가 주입됩니다.
+								  // 이름이 없으면 변수이름으로 찾습니다.
+								  // 언더바는 자동으로 삭제되고 소문자로 바뀐뒤에 찾습니다.
 
-	[FindObjectOfType] public ClassExample _classType;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
-	[FindObjectOfType] public ClassExample[] _classesType;     // 현재 씬에 존재하는 타입들을 찾아서 모두 주입시킵니다.
-	[FindObjectOfType] public List<ClassExample> _classListType;
-  
-  
+[FindGameObject("오브젝트 이름")] public GameObject _gameObject;         // 현재 씬에 존재하는 게임오브젝트를 찾습니다.
+[FindGameObjectWithTag("태그 이름")] public GameObject _gameObjectTag;     // 현재 씬에서 해당 태그가 설정 되어있는 게임오브젝트를 찾습니
+[FindGameObjectWithTag("태그 이름")] public GameObject[] _gameObjectsTag;   // 현재 씬에서 해당 태그가 붙어있는 게임오브젝트들을 모두 찾습니다.
+[FindGameObjectWithTag("태그 이름")] public List<GameObject> _gameObjectListTag;
+
+[FindObjectOfType] public ClassExample _classType;         // 현재 씬에 존재하는 타입을 찾아서 주입시킵니다.
+[FindObjectOfType] public ClassExample[] _classesType;     // 현재 씬에 존재하는 타입들을 찾아서 모두 주입시킵니다.
+[FindObjectOfType] public List<ClassExample> _classListType;
+```
+
   
 주의 사항 :
   1. private 변수는 [SerializeField] 직렬화 속성을 무조건 포함해야 합니다.
