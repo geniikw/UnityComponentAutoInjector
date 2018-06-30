@@ -43,12 +43,14 @@ namespace UnityEditor
             {
                 return;
             }
-            var serializedObjects = new SerializedObject(objects);
-            if (serializedObjects == null)
+
+            foreach(var obj in objects)
             {
-                return;
+                var so = new SerializedObject(obj);
+                if (so == null)
+                    return;
+                AutoInjection(so);
             }
-            AutoInjection(serializedObjects, true);
         }
 
         public static void AutoInjection(SerializedObject serializedObject, bool isForceInject = false)

@@ -17,5 +17,5 @@ public class Example : MonoBehaviour
     private Camera example = null;
 
     [SerializeField, FindGameObject("Directional Light")]
-    private Camera find = null;
+    private Light find = null;
 }
